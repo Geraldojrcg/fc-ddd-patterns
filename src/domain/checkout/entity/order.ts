@@ -46,4 +46,11 @@ export default class Order {
   total(): number {
     return this._items.reduce((acc, item) => acc + item.price, 0);
   }
+
+  addItem(item: OrderItem): void {
+    if (this._items.some((currentItem) => currentItem.id === item.id)) {
+      throw new Error("This item already exists in the order");
+    }
+    this._items.push(item);
+  }
 }
